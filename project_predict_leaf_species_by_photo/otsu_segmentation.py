@@ -1,7 +1,4 @@
-import cv2
-import numpy as np
-
-from DIPLOMA.my_dipl.kursovaya.utils import *
+from utils import *
 
 
 def get_marker(image):

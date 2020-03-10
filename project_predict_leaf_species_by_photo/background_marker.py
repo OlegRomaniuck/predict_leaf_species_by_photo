@@ -1,8 +1,4 @@
-
-
-from DIPLOMA.my_dipl.kursovaya.utils import *
-
-
+from utils import *
 
 # constants for filling holes mode
 FILL = {
@@ -27,7 +23,7 @@ def remove_whites(image, marker):
     white_remover = np.full((image.shape[0], image.shape[1]), True)
 
     # below line same as: white_remover = np.logical_and(white_remover,  image[:, :, 0] > 200)
-    white_remover[image[:, :, 0] <= 200] = False # blue channel
+    white_remover[image[:, :, 0] <= 200] = False  # blue channel
 
     # below line same as: white_remover = np.logical_and(white_remover,  image[:, :, 1] > 220)
     white_remover[image[:, :, 1] <= 220] = False  # green channel
@@ -111,7 +107,7 @@ def texture_filter(image, marker, threshold=220, window=3):
     Returns: nothing
     """
 
-    window = window - window//2 - 1
+    window = window - window // 2 - 1
     for x in range(0, image.shape[0]):
         for y in range(0, image.shape[1]):
             # print('x y', x, y)
@@ -129,7 +125,7 @@ def texture_filter(image, marker, threshold=220, window=3):
 
 
 def otsu_color_index(excess_green, excess_red):
-    return cv2.threshold(excess_green - excess_red, 0, 255,cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    return cv2.threshold(excess_green - excess_red, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
 
 def generate_background_marker(file_name):
@@ -257,7 +253,7 @@ def select_largest_obj(img_bin, lab_val=255, fill_mode=FILL['FLOOD'],
         mask_ = np.zeros((h_ + 2, w_ + 2), dtype=np.uint8)
 
         cv2.floodFill(img_floodfill, mask_, seedPoint=bkg_seed,
-                    newVal=lab_val)
+                      newVal=lab_val)
         holes_mask = cv2.bitwise_not(img_floodfill)  # mask of the holes.
 
         # get a mask to avoid filling non-holes that are adjacent to image edge
@@ -294,7 +290,7 @@ def select_largest_obj(img_bin, lab_val=255, fill_mode=FILL['FLOOD'],
         inv_max_side = np.amax(inv_img_labeled.shape)
 
         # set the minimum size of hole that is allowed to stay
-        inv_min_size = int(0.3 * sizes[largest_obj_lab - 1]) # todo: specify good min size
+        inv_min_size = int(0.3 * sizes[largest_obj_lab - 1])  # todo: specify good min size
 
         # generate the mask that allows holes greater than minimum size(weird)
         inv_mask = np.zeros((inv_img_labeled.shape), dtype=np.uint8)
@@ -311,3 +307,36 @@ def select_largest_obj(img_bin, lab_val=255, fill_mode=FILL['FLOOD'],
                                         kernel_)
 
     return largest_mask
+
+# def simple_test():
+#     # image = read_image(files['jpg1'])
+#     # g_img = excess_green(image)
+#     # r_img = excess_red(image)
+#     # debug(image[0], 'image')
+#     # debug(g_img[0], 'excess_green')
+#     # debug(r_img[0], 'excess_red')
+#     # debug(g_img[0]-r_img[0], 'diff')
+#
+#     original_image = read_image(files['jpg1'], cv2.IMREAD_GRAYSCALE)
+#     marker = np.full((original_image.shape[0], original_image.shape[1]), True)
+#     texture_filter(original_image, marker)
+#
+#
+# def test():
+#
+#     image = read_image(files['jpg1'])
+#
+#     rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+#
+#     plt.imshow(rgb_image)
+#     plt.show()
+#
+#     # plt.imshow(cv2.cvtColor(excess_green(image), cv2.COLOR_BGR2RGB))
+#     # plt.show()
+#     #
+#     # plt.imshow(cv2.cvtColor(excess_red(image), cv2.COLOR_BGR2RGB))
+#     # plt.show()
+#
+#
+# if __name__ == '__main__':
+#     simple_test()

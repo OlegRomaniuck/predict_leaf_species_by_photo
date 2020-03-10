@@ -1,10 +1,6 @@
 import os
 import argparse
-import numpy as np
-import cv2
-
-
-from DIPLOMA.my_dipl.kursovaya.background_marker import *
+from background_marker import *
 
 
 def generate_background_marker(file):
