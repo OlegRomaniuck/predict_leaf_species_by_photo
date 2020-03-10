@@ -1,4 +1,4 @@
-# Predict species by photo of leaf
+﻿# Predict species by photo of leaf
 In this project I'll try using classical methods from ML predict a plant species by photo of leaf.  
 Model trained on photo getting from: [**data set**](https://github.com/spMohanty/PlantVillage-Dataset/tree/master/raw/color)
 and support such type of species:  
@@ -18,7 +18,7 @@ and support such type of species:
 *Blueberry  
 :herb:  :fallen_leaf:  :leaves:  
  
-##**Features**  
+## **Features**  
 Pick out features:  
 * gradient features: laplacian_var, sobelx_var, sobely_var, sobelx8u_var, sobelx64f_var
 * geometrical: area, perimeter, physiological_length, physiological_width, aspect_ratio, rectangularity, circularity
@@ -28,7 +28,7 @@ Models was build based on:
 * RandomForestClassifier algorithm  
 * XGBoost algorithm  
 
-##**Comparative table**  
+## **Comparative table**  
 
 |    | RandomForestClassifier  | XGBoost         |
 -----| ------------------------ | ------------- |
@@ -40,7 +40,7 @@ Models was build based on:
 | F1 Micro Average   | 0.8536967130098517  | 0.8744130374735292  |  
 | Confusion matrix  | conf_tree.png  | conf_xgboost.png  |  
 
-##Result: Telegram bot
+## Result: Telegram bot
 Name: **@cegorach_executor_bot**   
 Api:
 /start some help for user
